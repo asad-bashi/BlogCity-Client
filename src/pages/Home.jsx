@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import BlogForm from "../components/BlogForm";
 import NavBar from "../components/NavBar";
 
 const PageContainer = styled.div`
@@ -12,6 +13,7 @@ function Home() {
   return (
     <PageContainer>
       <NavBar />
+      <BlogForm />
     </PageContainer>
   );
 }

@@ -11,6 +11,11 @@ const Container = styled.div`
   padding: 2rem;
 `;
 
+const Header = styled.header`
+  width: 100vw;
+  background-color: black;
+`;
+
 const ItemList = styled.ul`
   list-style: none;
   display: flex;
@@ -26,7 +31,7 @@ const ListItem = styled.li`
 
 function NavBar() {
   return (
-    <header style={{ width: "100vw", backgroundColor: "black" }}>
+    <Header>
       <Container>
         <p>LOGO</p>
         <ItemList>
@@ -36,7 +41,7 @@ function NavBar() {
           <ListItem>Create Account</ListItem>
         </ItemList>
       </Container>
-    </header>
+    </Header>
   );
 }
 
