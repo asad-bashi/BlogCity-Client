@@ -15,7 +15,7 @@ function BlogForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [helperText, setHelperText] = useState("");
-  async function submitBlog(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (title && content) {
       console.log("request sent");
@@ -30,7 +30,7 @@ function BlogForm() {
   }
 
   return (
-    <Form onSubmit={(e) => submitBlog(e)}>
+    <Form onSubmit={(e) => handleSubmit(e)}>
       <TextField
         onChange={(e) => setTitle(e.target.value)}
         value={title}
@@ -42,7 +42,7 @@ function BlogForm() {
         value={content}
         placeholder="Enter Blog Content"
         multiline
-        maxRows={5}
+        rows={5}
       />
       <button>submit</button>
       <p>{helperText}</p>

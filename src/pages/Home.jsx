@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AccountForm from "../components/AccountForm";
 import BlogForm from "../components/BlogForm";
 import NavBar from "../components/NavBar";
 
@@ -14,6 +15,7 @@ function Home() {
     <PageContainer>
       <NavBar />
       <BlogForm />
+      <AccountForm />
     </PageContainer>
   );
 }
