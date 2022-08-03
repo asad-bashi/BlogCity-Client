@@ -1,6 +1,6 @@
-import styled from "styled-components";
-
 import NavBar from "../components/NavBar";
+import styled from "styled-components";
+import BlogForm from "../components/BlogForm";
 
 const PageContainer = styled.div`
   display: flex;
@@ -9,12 +9,13 @@ const PageContainer = styled.div`
   min-height: 100vh;
 `;
 
-function Home() {
+function CreateBlog() {
   return (
     <PageContainer>
       <NavBar />
+      <BlogForm />
     </PageContainer>
   );
 }
 
-export default Home;
+export default CreateBlog;

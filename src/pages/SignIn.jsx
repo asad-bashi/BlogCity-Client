@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
 import NavBar from "../components/NavBar";
+import SignInForm from "../components/SignInForm";
 
 const PageContainer = styled.div`
   display: flex;
@@ -8,13 +8,13 @@ const PageContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
 `;
-
-function Home() {
+function SignIn() {
   return (
     <PageContainer>
       <NavBar />
+      <SignInForm />
     </PageContainer>
   );
 }
 
-export default Home;
+export default SignIn;

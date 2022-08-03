@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -35,10 +36,24 @@ function NavBar() {
       <Container>
         <p>LOGO</p>
         <ItemList>
-          <ListItem>Home</ListItem>
-          <ListItem>Create Blog</ListItem>
-          <ListItem>Sign In</ListItem>
-          <ListItem>Create Account</ListItem>
+          <Link style={{ color: "white", textDecoration: "none" }} to="/">
+            <ListItem>Home</ListItem>
+          </Link>
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/create-blog"
+          >
+            <ListItem>Create Blog</ListItem>
+          </Link>
+          <Link style={{ color: "white", textDecoration: "none" }} to="/sign-in">
+            <ListItem>Sign In</ListItem>
+          </Link>
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/create-account"
+          >
+            <ListItem>Create Account</ListItem>
+          </Link>
         </ItemList>
       </Container>
     </Header>
