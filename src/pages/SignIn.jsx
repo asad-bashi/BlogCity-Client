@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import NavBar from "../components/NavBar";
 import SignInForm from "../components/SignInForm";
 
 const PageContainer = styled.div`
@@ -11,7 +10,6 @@ const PageContainer = styled.div`
 function SignIn() {
   return (
     <PageContainer>
-      <NavBar />
       <SignInForm />
     </PageContainer>
   );

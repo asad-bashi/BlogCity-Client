@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import CreateAccount from "./pages/CreateAccount";
 import CreateBlog from "./pages/CreateBlog";
 import Home from "./pages/Home";
@@ -7,11 +8,12 @@ import SignIn from "./pages/SignIn";
 function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/create-blog" element={<CreateBlog />} />
+        <Route path="/blogs/new" element={<CreateBlog />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/accounts/new" element={<CreateAccount />} />
       </Routes>
     </Router>
   );

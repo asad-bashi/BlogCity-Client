@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
@@ -19,15 +20,20 @@ function AccountForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [helperText, setHelperText] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     const { data } = await axios.post("http://localhost:5000/api/users", {
       firstName,
       lastName,
       email,
       password,
     });
+
+    setHelperText(data);
   }
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
@@ -36,12 +42,14 @@ function AccountForm() {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           fullWidth
+          required
           label="First name"
         />
         <TextField
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           fullWidth
+          required
           label="Last name"
         />
       </NameContainer>
@@ -50,6 +58,7 @@ function AccountForm() {
         value={email}
         type="email"
         fullWidth
+        required
         label="Email"
       />
       <TextField
@@ -57,8 +66,10 @@ function AccountForm() {
         value={password}
         type="password"
         fullWidth
+        required
         label="Password"
       />
+      <p>{helperText}</p>
       <button>Create Account</button>
     </Form>
   );

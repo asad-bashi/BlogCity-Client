@@ -7,7 +7,6 @@ const Container = styled.div`
   justify-content: space-between;
   width: 90%;
   margin: 0 auto;
-  border: 2px solid red;
   color: #eeeeee;
   padding: 2rem;
 `;
@@ -41,16 +40,19 @@ function NavBar() {
           </Link>
           <Link
             style={{ color: "white", textDecoration: "none" }}
-            to="/create-blog"
+            to="/blogs/new"
           >
             <ListItem>Create Blog</ListItem>
           </Link>
-          <Link style={{ color: "white", textDecoration: "none" }} to="/sign-in">
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/sign-in"
+          >
             <ListItem>Sign In</ListItem>
           </Link>
           <Link
             style={{ color: "white", textDecoration: "none" }}
-            to="/create-account"
+            to="/accounts/new"
           >
             <ListItem>Create Account</ListItem>
           </Link>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import AccountForm from "../components/AccountForm";
-import NavBar from "../components/NavBar";
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,7 +10,6 @@ const PageContainer = styled.div`
 function CreateAccount() {
   return (
     <PageContainer>
-      <NavBar />
       <AccountForm />
     </PageContainer>
   );

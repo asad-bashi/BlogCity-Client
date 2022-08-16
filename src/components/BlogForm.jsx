@@ -13,20 +13,16 @@ const Form = styled.form`
 
 function BlogForm() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [body, setBody] = useState("");
   const [helperText, setHelperText] = useState("");
   async function handleSubmit(e) {
     e.preventDefault();
-    if (title && content) {
-      console.log("request sent");
-      const { data } = await axios.post("http://localhost:5000/api/blogs", {
-        title,
-        content,
-      });
-      setHelperText(data);
-    } else {
-      setHelperText("Invalid Blog Combination");
-    }
+
+    const { data } = await axios.post("http://localhost:5000/api/blogs/", {
+      title,
+      body,
+    });
+    setHelperText(data);
   }
 
   return (
@@ -36,13 +32,15 @@ function BlogForm() {
         value={title}
         id="title"
         label="Blog Title"
+        required
       />
       <TextField
-        onChange={(e) => setContent(e.target.value)}
-        value={content}
+        onChange={(e) => setBody(e.target.value)}
+        value={body}
         placeholder="Enter Blog Content"
         multiline
         rows={5}
+        required
       />
       <button>submit</button>
       <p>{helperText}</p>
