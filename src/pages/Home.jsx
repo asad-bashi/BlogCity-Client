@@ -1,7 +1,8 @@
 import styled from "styled-components";
-
 import BlogCard from "../components/BlogCard";
 import { useEffect, useState } from "react";
+import Categories from "../components/Categories";
+import Rocksky from "../images/rocksky.jpg";
 import axios from "axios";
 
 const PageContainer = styled.div`
@@ -9,13 +10,13 @@ const PageContainer = styled.div`
   flex-direction: column;
   width: 100vw;
   min-height: 100vh;
-  background-color: #eeeeee;
 `;
 
-const BlogContainer = styled.div`
+const BlogContainer = styled.main`
   width: 90%;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 `;
@@ -32,6 +33,7 @@ function Home() {
 
   return (
     <PageContainer>
+      <Categories />
       <BlogContainer>
         {blogs.map(({ id, title, body, date, name }) => {
           return (

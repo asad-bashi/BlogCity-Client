@@ -7,13 +7,15 @@ const Container = styled.div`
   justify-content: space-between;
   width: 90%;
   margin: 0 auto;
-  color: #eeeeee;
+  color: #424242;
   padding: 2rem;
 `;
 
 const Header = styled.header`
   width: 100vw;
-  background-color: black;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `;
 
 const ItemList = styled.ul`
@@ -35,23 +37,23 @@ function NavBar() {
       <Container>
         <p>LOGO</p>
         <ItemList>
-          <Link style={{ color: "white", textDecoration: "none" }} to="/">
+          <Link style={{ color: "#424242", textDecoration: "none" }} to="/">
             <ListItem>Home</ListItem>
           </Link>
           <Link
-            style={{ color: "white", textDecoration: "none" }}
+            style={{ color: "#424242", textDecoration: "none" }}
             to="/blogs/new"
           >
             <ListItem>Create Blog</ListItem>
           </Link>
           <Link
-            style={{ color: "white", textDecoration: "none" }}
+            style={{ color: "#424242", textDecoration: "none" }}
             to="/sign-in"
           >
             <ListItem>Sign In</ListItem>
           </Link>
           <Link
-            style={{ color: "white", textDecoration: "none" }}
+            style={{ color: "#424242", textDecoration: "none" }}
             to="/accounts/new"
           >
             <ListItem>Create Account</ListItem>
