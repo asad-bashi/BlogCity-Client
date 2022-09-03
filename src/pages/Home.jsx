@@ -2,14 +2,28 @@ import styled from "styled-components";
 import BlogCard from "../components/BlogCard";
 import { useEffect, useState } from "react";
 import Categories from "../components/Categories";
-import Rocksky from "../images/rocksky.jpg";
 import axios from "axios";
-
+import lake from "../images/lake.jpg";
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  row-gap: 2rem;
   width: 100vw;
   min-height: 100vh;
+`;
+
+const Title = styled.h1``;
+
+const ShowCase = styled.div`
+  height: 425px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(${lake});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const BlogContainer = styled.main`
@@ -33,11 +47,14 @@ function Home() {
 
   return (
     <PageContainer>
+      <ShowCase />
+
       <Categories />
       <BlogContainer>
         {blogs.map(({ id, title, body, date, name }) => {
           return (
             <BlogCard
+              key={id}
               id={id}
               name={name}
               date={date}

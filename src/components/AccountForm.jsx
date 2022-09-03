@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
+import FormButton from "./FormButton";
 import FormLabel from "./FormLabel";
+
 
 const Form = styled.form`
   display: flex;
@@ -21,15 +23,7 @@ const NameContainer = styled.div`
   gap: 1.5rem;
 `;
 
-const Button = styled.button`
-  padding: 1rem;
-  font-size: 1.1rem;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  background-color: #009688;
-  color: white;
-`;
+
 
 function AccountForm() {
   const [firstName, setFirstName] = useState("");
@@ -87,7 +81,7 @@ function AccountForm() {
         label="Password"
       />
       <p>{helperText}</p>
-      <Button>Create Account</Button>
+      <FormButton>Create Account</FormButton>
     </Form>
   );
 }

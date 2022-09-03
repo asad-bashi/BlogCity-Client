@@ -12,8 +12,10 @@ const BlogContainer = styled.div`
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   width: 400px;
   height: fit-content;
+
   transition: 150ms ease-in;
   &:hover {
+    cursor: pointer;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
       rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
@@ -32,36 +34,37 @@ const BlogContent = styled.div`
   display: flex;
   row-gap: 1.5rem;
   flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const BlogTitle = styled.h1`
   user-select: none;
   transition: 150ms ease-in;
   &:hover {
-    color: blue;
+    color: #009688;
     cursor: pointer;
   }
 `;
 
 //limit the number of characters body can display
 //with remainder being replaced with ...
-const BlogBody = styled.p``;
+const BlogBody = styled.p`
+  user-select: none;
+`;
 
 function BlogCard({ id, title, body, date, name }) {
   const navigate = useNavigate();
+
   return (
     <BlogContainer onClick={(e) => navigate(`/blogs/${id}`)}>
       <BlogImg />
       <BlogContent>
-        <Stack
-          sx={{ "&:hover": { cursor: "pointer" } }}
-          direction="row"
-          spacing={5}
-        >
+        <Stack direction="row" spacing={5}>
           <span>by {name}</span>
           <span>{date}</span>
         </Stack>
         <BlogTitle>{title}</BlogTitle>
-        <BlogBody>{body}</BlogBody>
+        <BlogBody>{`${body.slice(0, 372)}`}</BlogBody>
         <Divider />
         <p>tags</p>
       </BlogContent>

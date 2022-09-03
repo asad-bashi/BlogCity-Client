@@ -4,6 +4,7 @@ import axios from "axios";
 import { TextField } from "@mui/material";
 import styled from "styled-components";
 import FormLabel from "./FormLabel";
+import FormButton from "./FormButton";
 
 const Form = styled.form`
   display: flex;
@@ -16,19 +17,10 @@ const Form = styled.form`
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 `;
 
-const Button = styled.button`
-  padding: 1rem;
-  font-size: 1.1rem;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  background-color: #009688;
-  color: white;
-`;
-
 function BlogForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  // const [img, setImg] = useState("");
   const [helperText, setHelperText] = useState("");
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -40,14 +32,13 @@ function BlogForm() {
       title,
       body,
     });
+
     setHelperText(data);
-    setLoading(false);
-    navigate("/");
   }
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
-      <FormLabel>Create Blog</FormLabel>
+      <FormLabel>Tell your story</FormLabel>
       <TextField
         onChange={(e) => setTitle(e.target.value)}
         value={title}
@@ -62,7 +53,14 @@ function BlogForm() {
         rows={5}
         required
       />
-      <Button>Share</Button>
+      {/* <input
+        value={img}
+        onChange={(e) => setImg(e.target.value)}
+        type="file"
+        name="img"
+        id=""
+      /> */}
+      <FormButton>Share</FormButton>
       <p>{helperText}</p>
     </Form>
   );

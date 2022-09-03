@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { padding } from "@mui/system";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 const Container = styled.div`
   display: flex;
@@ -26,12 +29,17 @@ const ItemList = styled.ul`
 
 const ListItem = styled.li`
   font-size: 1.3rem;
+  padding: 0.25em 0.45em;
+  border-radius: 6px;
   &:hover {
     cursor: pointer;
   }
 `;
 
 function NavBar() {
+  const { isAuthenticated, setAuthenticated } = useContext(UserContext);
+  console.log(isAuthenticated);
+
   return (
     <Header>
       <Container>
@@ -44,20 +52,45 @@ function NavBar() {
             style={{ color: "#424242", textDecoration: "none" }}
             to="/blogs/new"
           >
-            <ListItem>Create Blog</ListItem>
+            <ListItem>Note</ListItem>
           </Link>
-          <Link
+          {isAuthenticated ? (
+            <>blah</>
+          ) : (
+            <>
+              <Link
+                style={{ color: "#424242", textDecoration: "none" }}
+                to="/login"
+              >
+                <ListItem>Login</ListItem>
+              </Link>
+              <Link
+                style={{ color: "#424242", textDecoration: "none" }}
+                to="/accounts/new"
+              >
+                <ListItem
+                  style={{ backgroundColor: "#009688", color: "white" }}
+                >
+                  Join Us
+                </ListItem>
+              </Link>
+            </>
+          )}
+
+          {/* <Link
             style={{ color: "#424242", textDecoration: "none" }}
-            to="/sign-in"
+            to="/login"
           >
-            <ListItem>Sign In</ListItem>
+            <ListItem>Login</ListItem>
           </Link>
           <Link
             style={{ color: "#424242", textDecoration: "none" }}
             to="/accounts/new"
           >
-            <ListItem>Create Account</ListItem>
-          </Link>
+            <ListItem style={{ backgroundColor: "#009688", color: "white" }}>
+              Join Us
+            </ListItem>
+          </Link> */}
         </ItemList>
       </Container>
     </Header>

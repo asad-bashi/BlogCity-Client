@@ -1,12 +1,13 @@
 import styled from "styled-components";
-
+import { v4 as uuidv4 } from "uuid";
 const Wrapper = styled.section`
-  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
 `;
 
 const Tag = styled.span`
@@ -40,7 +41,7 @@ function Categories() {
   return (
     <Wrapper>
       {TagList.map((tag) => (
-        <Tag>{tag}</Tag>
+        <Tag key={uuidv4()}>{tag}</Tag>
       ))}
     </Wrapper>
   );
