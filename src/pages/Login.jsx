@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/forms/LoginForm";
 
 const PageContainer = styled.div`
   padding-top: 7rem;

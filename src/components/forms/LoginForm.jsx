@@ -1,25 +1,13 @@
 import { useState, useContext } from "react";
-import { TextField } from "@mui/material";
-import styled from "styled-components";
+import { TextField, Stack } from "@mui/material";
 import axios from "axios";
-import FormLabel from "./FormLabel";
-import FormButton from "./FormButton";
-import { UserContext } from "../App";
-import { useNavigate } from "react-router-dom";
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  row-gap: 2rem;
-  padding: 2rem 3rem;
-  background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-`;
+import { UserContext } from "../../App";
+import { useNavigate, Link } from "react-router-dom";
+import { Form, Label, Button } from "./FormHelpers";
 
 function LoginForm() {
   const navigate = useNavigate();
-  const { isAuthenticated, setAuthenticated } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [helperText, setHelperText] = useState("");
@@ -32,14 +20,11 @@ function LoginForm() {
         email,
         password,
       });
-
-      const isValid = await axios.get("http://localhost:5000/api/isAuth");
-      console.log(isValid);
-      setAuthenticated(isValid);
-
-      console.log(data);
+      const userObj = await axios.get("http://localhost:5000/api/isAuth");
+      setUser(userObj.data);
       setHelperText(data.message);
-      if (isAuthenticated) {
+
+      if (userObj.data.isAuthenticated) {
         navigate("/");
       }
     } catch (e) {
@@ -48,7 +33,7 @@ function LoginForm() {
   }
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
-      <FormLabel>Login</FormLabel>
+      <Label>Login</Label>
       <TextField
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -61,8 +46,22 @@ function LoginForm() {
         label="password"
         type="password"
       />
-      <FormButton>Log In</FormButton>
       <h3>{helperText}</h3>
+      <Button>Log In</Button>
+      <Stack
+        fontSize="1.2rem"
+        direction="row"
+        spacing={1}
+        justifyContent="center"
+      >
+        <span>Not a member?</span>
+        <Link
+          style={{ textDecoration: "none", color: "#009688" }}
+          to="/accounts/new"
+        >
+          Sign Up
+        </Link>
+      </Stack>
     </Form>
   );
 }

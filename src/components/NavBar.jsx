@@ -29,6 +29,7 @@ const ItemList = styled.ul`
 
 const ListItem = styled.li`
   font-size: 1.3rem;
+  font-weight: 300;
   padding: 0.25em 0.45em;
   border-radius: 6px;
   &:hover {
@@ -37,8 +38,7 @@ const ListItem = styled.li`
 `;
 
 function NavBar() {
-  const { isAuthenticated, setAuthenticated } = useContext(UserContext);
-  console.log(isAuthenticated);
+  const { user } = useContext(UserContext);
 
   return (
     <Header>
@@ -54,8 +54,19 @@ function NavBar() {
           >
             <ListItem>Note</ListItem>
           </Link>
-          {isAuthenticated ? (
-            <>blah</>
+          {user.isAuthenticated ? (
+            <>
+              <Link
+                style={{ color: "#424242", textDecoration: "none" }}
+                to="/logout"
+              >
+                <ListItem
+                  style={{ backgroundColor: "#009688", color: "white" }}
+                >
+                  Logout
+                </ListItem>
+              </Link>
+            </>
           ) : (
             <>
               <Link
@@ -71,7 +82,7 @@ function NavBar() {
                 <ListItem
                   style={{ backgroundColor: "#009688", color: "white" }}
                 >
-                  Join Us
+                  Sign Up
                 </ListItem>
               </Link>
             </>

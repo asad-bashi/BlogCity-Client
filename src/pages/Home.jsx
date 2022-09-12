@@ -12,8 +12,6 @@ const PageContainer = styled.div`
   min-height: 100vh;
 `;
 
-const Title = styled.h1``;
-
 const ShowCase = styled.div`
   height: 425px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
@@ -37,21 +35,14 @@ const BlogContainer = styled.main`
 
 function Home() {
   const [blogs, setBlogs] = useState([]);
-  useEffect(() => {
-    async function getBlogs() {
-      const { data } = await axios.get("http://localhost:5000/api/blogs/");
-      setBlogs(data);
-    }
-    getBlogs();
-  }, []);
 
   return (
     <PageContainer>
       <ShowCase />
 
-      <Categories />
+      <Categories setBlogs={setBlogs} />
       <BlogContainer>
-        {blogs.map(({ id, title, body, date, name }) => {
+        {blogs.map(({ id, title, body, date, name, tags }) => {
           return (
             <BlogCard
               key={id}
@@ -60,6 +51,7 @@ function Home() {
               date={date}
               body={body}
               title={title}
+              tags={tags}
             />
           );
         })}

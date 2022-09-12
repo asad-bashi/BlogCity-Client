@@ -3,27 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
-import FormButton from "./FormButton";
-import FormLabel from "./FormLabel";
 
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  row-gap: 2rem;
-  background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  padding: 2rem 3rem;
-`;
+import { Form, Label, Button } from "./FormHelpers";
 
 const NameContainer = styled.div`
   display: flex;
   gap: 1.5rem;
 `;
-
-
 
 function AccountForm() {
   const [firstName, setFirstName] = useState("");
@@ -47,7 +33,7 @@ function AccountForm() {
   }
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
-      <FormLabel>Account Registration</FormLabel>
+      <Label>Account Registration</Label>
       <NameContainer>
         <TextField
           value={firstName}
@@ -81,7 +67,7 @@ function AccountForm() {
         label="Password"
       />
       <p>{helperText}</p>
-      <FormButton>Create Account</FormButton>
+      <Button>Create Account</Button>
     </Form>
   );
 }

@@ -52,7 +52,7 @@ const BlogBody = styled.p`
   user-select: none;
 `;
 
-function BlogCard({ id, title, body, date, name }) {
+function BlogCard({ id, title, body, date, name, tags }) {
   const navigate = useNavigate();
 
   return (
@@ -60,13 +60,13 @@ function BlogCard({ id, title, body, date, name }) {
       <BlogImg />
       <BlogContent>
         <Stack direction="row" spacing={5}>
-          <span>by {name}</span>
-          <span>{date}</span>
+          <span style={{ whiteSpace: "nowrap" }}>by {name}</span>
+          <span style={{ whiteSpace: "nowrap" }}>{date}</span>
         </Stack>
         <BlogTitle>{title}</BlogTitle>
         <BlogBody>{`${body.slice(0, 372)}`}</BlogBody>
         <Divider />
-        <p>tags</p>
+        <p>{tags}</p>
       </BlogContent>
     </BlogContainer>
   );
