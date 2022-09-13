@@ -13,20 +13,24 @@ function BlogForm() {
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
+    e.preventDefault();
     let selectedTags = "";
     tags.forEach(({ tag, isSelected }) => {
       if (isSelected) {
-        selectedTags = selectedTags.concat(`${tag} `);
+        if (selectedTags) {
+          selectedTags = selectedTags.concat(`, ${tag} `);
+        } else {
+          selectedTags = selectedTags.concat(`${tag}`);
+        }
       }
     });
-    console.log(selectedTags);
-    e.preventDefault();
     const { data } = await axios.post("http://localhost:5000/api/blogs/", {
       title,
       body,
       selectedTags,
     });
-    setHelperText(data);
+    setHelperText(data.message);
+    navigate(`/blogs/${data.id}`);
   }
 
   return (
