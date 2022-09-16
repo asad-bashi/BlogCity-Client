@@ -4,7 +4,7 @@ import { PageContainer } from "./PageHelper";
 
 function CreateAccount() {
   return (
-    <PageContainer>
+    <PageContainer id="svg">
       <AccountForm />
     </PageContainer>
   );

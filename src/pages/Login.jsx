@@ -11,7 +11,7 @@ const PageContainer = styled.div`
 `;
 function Login() {
   return (
-    <PageContainer>
+    <PageContainer id="svg">
       <LoginForm />
     </PageContainer>
   );

@@ -4,7 +4,7 @@ import axios from "axios";
 import { TextField, Stack } from "@mui/material";
 import { Form, Label, Button } from "./FormHelpers";
 import TagTray from "../TagTray";
-
+import base64 from "base-64";
 function BlogForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -12,8 +12,30 @@ function BlogForm() {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
 
+  // const dataFromFile = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const fileReader = new FileReader();
+  //     fileReader.readAsDataURL(file);
+
+  //     fileReader.onload = () => {
+  //       resolve(fileReader.result);
+  //     };
+
+  //     fileReader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //   });
+  // };
+
+  // const uploadImage = async (e) => {
+  //   const file = e.target.files[0];
+  //   const data = await dataFromFile(file);
+  //   setImg(data);
+  // };
+
   async function handleSubmit(e) {
     e.preventDefault();
+
     let selectedTags = "";
     tags.forEach(({ tag, isSelected }) => {
       if (isSelected) {
@@ -30,7 +52,6 @@ function BlogForm() {
       selectedTags,
     });
     setHelperText(data.message);
-    navigate(`/blogs/${data.id}`);
   }
 
   return (

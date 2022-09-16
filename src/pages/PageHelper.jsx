@@ -6,4 +6,5 @@ export const PageContainer = styled.div`
   align-items: center;
   width: 100vw;
   padding-top: 5rem;
+  min-height: 100vh;
 `;
