@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { padding } from "@mui/system";
 import { useContext } from "react";
 import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import { AppBar } from "@mui/material";
 
 const Container = styled.div`
   display: flex;
@@ -11,14 +12,8 @@ const Container = styled.div`
   width: 90%;
   margin: 0 auto;
   color: #424242;
-  padding: 2rem;
-`;
-
-const Header = styled.header`
-  width: 100vw;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  padding-top: 0.35rem;
+  padding-bottom: 0.25rem;
 `;
 
 const ItemList = styled.ul`
@@ -37,31 +32,38 @@ const ListItem = styled.li`
   }
 `;
 
-function NavBar() {
+function NavBar({ variant }) {
   const { user } = useContext(UserContext);
 
+  const linkStyles = { color: "black", textDecoration: "none" };
+
+  const navigate = useNavigate();
   return (
-    <Header>
+    <AppBar sx={{ backgroundColor: "white" }}>
       <Container>
-        <p>LOGO</p>
+        <img
+          height="85px"
+          src="https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6kh...aJqxNLmhvFwXs1M3EMoAJtliYuj...Ni9...w4"
+          alt=""
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        />
+
         <ItemList>
-          <Link style={{ color: "#424242", textDecoration: "none" }} to="/">
+          <Link style={linkStyles} to="/">
             <ListItem>Home</ListItem>
           </Link>
-          <Link
-            style={{ color: "#424242", textDecoration: "none" }}
-            to="/blogs/new"
-          >
+          <Link style={linkStyles} to="/blogs/new">
             <ListItem>Note</ListItem>
           </Link>
           {user.isAuthenticated ? (
             <>
-              <Link
-                style={{ color: "#424242", textDecoration: "none" }}
-                to="/logout"
-              >
+              <Link style={linkStyles} to="/logout">
                 <ListItem
-                  style={{ backgroundColor: "#009688", color: "white" }}
+                  style={{
+                    backgroundColor: "#009688",
+                    color: "white",
+                  }}
                 >
                   Logout
                 </ListItem>
@@ -69,16 +71,10 @@ function NavBar() {
             </>
           ) : (
             <>
-              <Link
-                style={{ color: "#424242", textDecoration: "none" }}
-                to="/login"
-              >
+              <Link style={linkStyles} to="/login">
                 <ListItem>Login</ListItem>
               </Link>
-              <Link
-                style={{ color: "#424242", textDecoration: "none" }}
-                to="/accounts/new"
-              >
+              <Link style={linkStyles} to="/accounts/new">
                 <ListItem
                   style={{ backgroundColor: "#009688", color: "white" }}
                 >
@@ -87,24 +83,9 @@ function NavBar() {
               </Link>
             </>
           )}
-
-          {/* <Link
-            style={{ color: "#424242", textDecoration: "none" }}
-            to="/login"
-          >
-            <ListItem>Login</ListItem>
-          </Link>
-          <Link
-            style={{ color: "#424242", textDecoration: "none" }}
-            to="/accounts/new"
-          >
-            <ListItem style={{ backgroundColor: "#009688", color: "white" }}>
-              Join Us
-            </ListItem>
-          </Link> */}
         </ItemList>
       </Container>
-    </Header>
+    </AppBar>
   );
 }
 

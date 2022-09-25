@@ -19,13 +19,13 @@ const Tray = styled.div`
 
 const Item = styled.span`
   color: #424242;
-  border-radius: 100px;
+  background-color: #bdbdbd;
+  border-radius: 5px;
   font-weight: 300;
   font-size: 0.85rem;
   padding: 0.45rem 1.3rem;
   transition: 100ms ease-in;
   cursor: pointer;
-  border: 1px solid #009688;
   user-select: none;
   &:hover {
     background-color: #4db6ac;
@@ -50,7 +50,10 @@ function TagTray({ tags, setTags }) {
       {tags.map(({ tag, isSelected }, index) => (
         <Item
           key={uuidv4()}
-          style={{ backgroundColor: isSelected ? "#009688" : "" }}
+          style={{
+            backgroundColor: isSelected ? "#009688" : "",
+            color: isSelected ? "white" : "#424242",
+          }}
           onClick={() => handleClick(index)}
         >
           {tag}

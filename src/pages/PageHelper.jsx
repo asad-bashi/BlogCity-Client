@@ -5,6 +5,7 @@ export const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  padding-top: 5rem;
+  padding: 5rem 0rem;
   min-height: 100vh;
+  width: 100vw;
 `;

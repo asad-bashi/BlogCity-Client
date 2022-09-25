@@ -31,7 +31,7 @@ const Tag = styled.span`
   border-radius: 100px;
   border: 2px solid red;
   color: #424242;
-  border: 1px solid #9e9e9e;
+  border: 1px solid #bdbdbd;
   transition: 100ms ease-in;
   &:hover {
     background-color: #009688;

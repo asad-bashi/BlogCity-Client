@@ -19,9 +19,12 @@ function App() {
 
   useEffect(() => {
     async function isAuth() {
-      const { data } = await axios.get("http://localhost:5000/api/isAuth");
-
-      setUser(data);
+      try {
+        const { data } = await axios.get("http://localhost:5000/api/isAuth");
+        setUser(data);
+      } catch (e) {
+        console.log(e);
+      }
     }
     isAuth();
   }, []);

@@ -1,8 +1,17 @@
 import styled from "styled-components";
-import Roses from "../images/roses.jpg";
 import { Stack, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import { Badge } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#009688",
+    },
+  },
+});
 const BlogContainer = styled.div`
   background-color: white;
   display: flex;
@@ -22,7 +31,7 @@ const BlogContainer = styled.div`
 `;
 
 const BlogImg = styled.div`
-  background-image: url(${Roses});
+  background-image: url(${(props) => props.image});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -46,18 +55,16 @@ const BlogTitle = styled.h1`
   }
 `;
 
-//limit the number of characters body can display
-//with remainder being replaced with ...
 const BlogBody = styled.p`
   user-select: none;
 `;
 
-function BlogCard({ id, title, body, date, name, tags }) {
+function BlogCard({ id, title, body, date, name, tags, image, numOfComments }) {
   const navigate = useNavigate();
 
   return (
     <BlogContainer onClick={(e) => navigate(`/blogs/${id}`)}>
-      <BlogImg />
+      <BlogImg image={`http://localhost:5000/${image}`} />
       <BlogContent>
         <Stack direction="row" spacing={5}>
           <span style={{ whiteSpace: "nowrap" }}>by {name}</span>
@@ -65,7 +72,15 @@ function BlogCard({ id, title, body, date, name, tags }) {
         </Stack>
         <BlogTitle>{title}</BlogTitle>
         <BlogBody>{`${body.slice(0, 372)}`}</BlogBody>
-        <Divider />
+
+        <Divider textAlign="right">
+          <ThemeProvider theme={theme}>
+            <Badge color="primary" badgeContent={numOfComments}>
+              <ChatBubbleOutlineIcon sx={{ color: "#757575" }} />
+            </Badge>
+          </ThemeProvider>
+        </Divider>
+
         <p>{tags}</p>
       </BlogContent>
     </BlogContainer>
