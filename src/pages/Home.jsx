@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import BlogCard from "../components/BlogCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Categories from "../components/Categories";
-import lake from "../images/lake.jpg";
+import axios from "axios";
+import ShowCaseItem from "../components/ShowCaseItem";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { v4 as uuidv4 } from "uuid";
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,8 +18,6 @@ const PageContainer = styled.div`
 
 const ShowCase = styled.div`
   height: 655px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(${lake});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,17 +38,50 @@ const BlogContainer = styled.main`
 
 function Home() {
   const [blogs, setBlogs] = useState([]);
+  const [blogsShowCase, setBlogsShowcase] = useState([]);
+
+  useEffect(() => {
+    async function getShowCaseBlogs() {
+      const { data } = await axios.get("http://localhost:5000/api/blogs");
+      setBlogsShowcase(data);
+    }
+    getShowCaseBlogs();
+  }, []);
 
   return (
     <PageContainer>
-      <ShowCase />
+      <ShowCase>
+        <Swiper style={{ height: "100%" }}>
+          {blogsShowCase.slice(0, 5).map(({ title, body, name, image, id }) => {
+            return (
+              <SwiperSlide
+                key={uuidv4()}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <ShowCaseItem
+                  id={id}
+                  key={uuidv4()}
+                  title={title}
+                  body={body}
+                  name={name}
+                  image={image.replaceAll("\\", "/")}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </ShowCase>
       <Categories setBlogs={setBlogs} />
       <BlogContainer>
         {blogs.map(
           ({ id, title, body, date, name, tags, image, numOfComments }) => {
             return (
               <BlogCard
-                key={id}
+                key={uuidv4()}
                 id={id}
                 name={name}
                 date={date}

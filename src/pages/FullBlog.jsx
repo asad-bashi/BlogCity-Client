@@ -23,6 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const Poster = styled.div`
+  margin-top: 1rem;
   background-image: url(${(props) => props.image});
   background-position: center;
   background-repeat: no-repeat;

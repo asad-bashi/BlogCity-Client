@@ -39,7 +39,7 @@ function NavBar({ variant }) {
 
   const navigate = useNavigate();
   return (
-    <AppBar sx={{ backgroundColor: "white" }}>
+    <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
       <Container>
         <img
           height="85px"

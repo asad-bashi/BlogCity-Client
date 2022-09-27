@@ -62,7 +62,10 @@ function BlogForm() {
 
       <Button>Share</Button>
       <p
-        style={{ textAlign: "center", display: helperText ? "inline" : "none" }}
+        style={{
+          textAlign: "center",
+          display: helperText ? "inline" : "none",
+        }}
       >
         {helperText}
       </p>

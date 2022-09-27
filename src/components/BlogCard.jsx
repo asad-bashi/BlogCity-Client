@@ -71,7 +71,7 @@ function BlogCard({ id, title, body, date, name, tags, image, numOfComments }) {
           <span style={{ whiteSpace: "nowrap" }}>{date}</span>
         </Stack>
         <BlogTitle>{title}</BlogTitle>
-        <BlogBody>{`${body.slice(0, 372)}`}</BlogBody>
+        <BlogBody>{`${body.slice(0, 300)}`}</BlogBody>
 
         <Divider textAlign="right">
           <ThemeProvider theme={theme}>
