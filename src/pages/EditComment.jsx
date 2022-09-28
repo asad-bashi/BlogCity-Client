@@ -3,34 +3,34 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { UserContext } from "../App";
-import EditBlogForm from "../components/forms/EditBlogForm";
 import { PageContainer } from "./PageHelper";
+import EditCommentForm from "../components/forms/EditCommentForm";
 
 const Message = styled.p`
   font-size: 1.4rem;
 `;
-function EditBlog() {
+function EditComment() {
   const { id } = useParams();
-  const [blog, setBlog] = useState({});
+  const [comment, setComment] = useState({});
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    async function getBlog() {
-      const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
-      setBlog(data);
+    async function getComment() {
+      const { data } = await axios.get(
+        `http://localhost:5000/api/comments/${id}`
+      );
+      setComment(data);
     }
-    getBlog();
+    getComment();
   }, []);
 
   return (
     <PageContainer id="svg">
-      {user.isAuthenticated && user.id === blog.user_id ? (
-        <EditBlogForm blog={blog} setBlog={setBlog} />
+      {user.isAuthenticated && user.id === comment.user_id ? (
+        <EditCommentForm comment={comment} setComment={setComment} />
       ) : (
         <Message>
-          {blog
-            ? `You're not authorized to reach this page. You need to`
-            : `Blog Not Found`}
+          {`You're not authorized to reach this page. You need to `}
           <Link
             style={{ textDecoration: "none", color: "#009688" }}
             to="/login"
@@ -43,4 +43,4 @@ function EditBlog() {
   );
 }
 
-export default EditBlog;
+export default EditComment;

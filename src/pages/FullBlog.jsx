@@ -41,8 +41,8 @@ const Main = styled.main`
   color: #424242;
   padding: 0.75rem 1.4rem;
   &::first-letter {
-    font-weight: 500;
-    font-size: 2.5rem;
+    font-weight: 400;
+    font-size: 3rem;
     color: black;
   }
 `;
@@ -79,6 +79,14 @@ const DeleteConfirmation = styled.div`
   align-items: center;
 `;
 
+const Title = styled.h1`
+  font-weight: 300;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+`;
+
 function FullBLog() {
   const { id } = useParams();
   const [blog, setBlog] = useState({});
@@ -105,7 +113,7 @@ function FullBLog() {
     async function getComments() {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/comments/${id}`
+          `http://localhost:5000/api/commentsByBlogId/${id}`
         );
         setComments(data);
       } catch (e) {
@@ -166,7 +174,7 @@ function FullBLog() {
               alignItems="center"
               direction="row"
             >
-              <h1>{blog.title}</h1>
+              <Title>{blog.title}</Title>
               {user.id === blog.user_id ? (
                 <Stack spacing={1.5} direction="row">
                   <Tooltip title="Edit" arrow>
@@ -174,7 +182,8 @@ function FullBLog() {
                       onClick={() => navigate(`/blogs/${id}/edit`)}
                       sx={{
                         fontSize: "30px",
-                        "&:hover": { cursor: "pointer" },
+
+                        "&:hover": { cursor: "pointer", color: "#009688" },
                       }}
                     />
                   </Tooltip>
@@ -183,7 +192,7 @@ function FullBLog() {
                       onClick={() => setIsModalOpen(true)}
                       sx={{
                         fontSize: "30px",
-                        "&:hover": { cursor: "pointer" },
+                        "&:hover": { cursor: "pointer", color: "#009688" },
                       }}
                     />
                   </Tooltip>
@@ -208,7 +217,11 @@ function FullBLog() {
           {comments.map((comment) => {
             return (
               <>
-                <Comment key={uuidv4()} comment={comment} />
+                <Comment
+                  key={uuidv4()}
+                  comment={comment}
+                  setComments={setComments}
+                />
                 <Divider />
               </>
             );

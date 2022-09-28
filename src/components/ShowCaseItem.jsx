@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 100%;
 `;
 
@@ -23,7 +23,11 @@ const Title = styled.h1`
 
 const Content = styled.div`
   display: flex;
+  width: 80%;
+  max-width: 750px;
+  margin: 0 auto;
   flex-direction: column;
+  margin-bottom: 2rem;
 `;
 
 const Body = styled.p`

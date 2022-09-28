@@ -5,46 +5,36 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function EditBlogForm({ blog, setBlog }) {
+function EditCommentForm({ comment }) {
   const { id } = useParams();
-  const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTitle(blog.title);
-    setBody(blog.body);
+    setBody(comment.body);
   }, [id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    await axios.put(`http://localhost:5000/api/blogs/${blog.id}`, {
-      title,
+    await axios.put(`http://localhost:5000/api/comments/${id}`, {
       body,
     });
-    navigate(`/blogs/${blog.id}`);
+    navigate(`/blogs/${comment.blog_id}`);
   }
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
-      <Label>Edit Story</Label>
+      <Label>Edit Comment</Label>
       <TextField
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-        label="Title"
-      />
-      <TextField
+        required
         onChange={(e) => setBody(e.target.value)}
         value={body}
-        placeholder="Enter Blog Content"
-        multiline
-        rows={5}
-        label="Body"
+        label="Comment"
       />
+
       <Button>Edit</Button>
     </Form>
   );
 }
 
-export default EditBlogForm;
+export default EditCommentForm;

@@ -5,9 +5,8 @@ import { Button } from "./FormHelpers";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-
 function CommentForm({ setComments }) {
-  const [comment, setComment] = useState("");
+  const [body, setBody] = useState("");
   const [helperText, setHelperText] = useState("");
 
   const { id } = useParams();
@@ -16,12 +15,14 @@ function CommentForm({ setComments }) {
     e.preventDefault();
     try {
       const { data } = await axios.post("http://localhost:5000/api/comments/", {
-        comment,
+        comment: body,
         blog_id: id,
       });
 
-      const req = await axios.get(`http://localhost:5000/api/comments/${id}`);
-      console.log(req);
+      const req = await axios.get(
+        `http://localhost:5000/api/commentsByBlogId/${id}`
+      );
+
       setComments(req.data);
       setHelperText(data.message);
     } catch (e) {
@@ -36,8 +37,8 @@ function CommentForm({ setComments }) {
           required
           placeholder="Leave a comment..."
           fullWidth
-          onChange={(e) => setComment(e.target.value)}
-          value={comment}
+          onChange={(e) => setBody(e.target.value)}
+          value={body}
           multiline
           rows={5}
         />

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import styled from "styled-components";
 import { PageContainer } from "./PageHelper";
+import { useNavigate } from "react-router-dom";
 
 const Message = styled.p`
   font-size: 1.4rem;
@@ -11,6 +12,7 @@ const Message = styled.p`
 
 function Logout() {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function logoutUser() {
@@ -21,7 +23,7 @@ function Logout() {
         await axios.post("http://localhost:5000/api/logout");
         const isValid = await axios.get("http://localhost:5000/api/isAuth");
         setUser(isValid);
-        console.log("post made");
+        navigate("/");
       } catch (e) {
         console.log(e);
       }
@@ -48,4 +50,3 @@ function Logout() {
 }
 
 export default Logout;
-

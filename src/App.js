@@ -10,6 +10,7 @@ import FullBLog from "./pages/FullBlog";
 import Logout from "./pages/Logout";
 import EditBlog from "./pages/EditBlog";
 import Error from "./pages/Error";
+import EditComment from "./pages/EditComment";
 
 axios.defaults.withCredentials = true;
 
@@ -40,6 +41,7 @@ function App() {
             <Route path=":id" element={<FullBLog />} />
             <Route path=":id/edit" element={<EditBlog />} />
           </Route>
+          <Route path="/comments/:id/edit" element={<EditComment />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
