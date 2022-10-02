@@ -19,7 +19,7 @@ function EditBlogForm({ blog, setBlog }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await axios.put(`http://localhost:5000/api/blogs/${blog.id}`, {
+    await axios.put(`${process.env.REACT_APP_BASE_URL}api/blogs/${blog.id}`, {
       title,
       body,
     });

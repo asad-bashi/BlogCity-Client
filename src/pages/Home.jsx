@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 import BlogCard from "../components/BlogCard";
 import { useState, useEffect } from "react";
 import Categories from "../components/Categories";
@@ -6,14 +7,16 @@ import axios from "axios";
 import ShowCaseItem from "../components/ShowCaseItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { v4 as uuidv4 } from "uuid";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
+import SwiperCore, { Autoplay, Navigation } from "swiper";
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   width: 100vw;
   min-height: 100vh;
-  margin-bottom: 5rem;
 `;
 
 const ShowCase = styled.div`
@@ -39,19 +42,33 @@ const BlogContainer = styled.main`
 function Home() {
   const [blogs, setBlogs] = useState([]);
   const [blogsShowCase, setBlogsShowcase] = useState([]);
+  SwiperCore.use([Autoplay, Navigation]);
 
   useEffect(() => {
     async function getShowCaseBlogs() {
-      const { data } = await axios.get("http://localhost:5000/api/blogs");
-      setBlogsShowcase(data);
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}api/blogs`
+        );
+        setBlogsShowcase(data);
+      } catch (e) {
+        console.log(e);
+      }
     }
     getShowCaseBlogs();
   }, []);
 
   return (
-    <PageContainer>
+    <PageContainer id="svg">
       <ShowCase>
-        <Swiper style={{ height: "100%" }}>
+        <Swiper
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          style={{ height: "100%" }}
+        >
           {blogsShowCase.slice(0, 5).map(({ title, body, name, image, id }) => {
             return (
               <SwiperSlide
@@ -74,6 +91,7 @@ function Home() {
             );
           })}
         </Swiper>
+        <></>
       </ShowCase>
       <Categories setBlogs={setBlogs} />
       <BlogContainer>

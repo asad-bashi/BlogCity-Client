@@ -85,9 +85,11 @@ function Comment({ comment, setComments }) {
 
   async function handleDelete() {
     try {
-      await axios.delete(`http://localhost:5000/api/comments/${comment.id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}api/comments/${comment.id}`
+      );
       const { data } = await axios.get(
-        `http://localhost:5000/api/commentsByBlogId/${comment.blog_id}`
+        `${process.env.REACT_APP_BASE_URL}api/commentsByBlogId/${comment.blog_id}`
       );
       console.log(data);
       setComments(data);

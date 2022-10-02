@@ -4,6 +4,10 @@ import { useContext } from "react";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { AppBar } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Drawer } from "@mui/material";
+import { useState } from "react";
+import "../index.css";
 
 const Container = styled.div`
   display: flex;
@@ -14,6 +18,23 @@ const Container = styled.div`
   color: #424242;
   padding-top: 0.35rem;
   padding-bottom: 0.25rem;
+`;
+
+const Nav = styled.nav`
+  @media (max-width: 750px) {
+    display: none;
+  }
+`;
+
+const MobileIcon = styled.span`
+  display: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 750px) {
+    display: inline;
+  }
 `;
 
 const ItemList = styled.ul`
@@ -32,14 +53,86 @@ const ListItem = styled.li`
   }
 `;
 
-function NavBar({ variant }) {
+function NavBar() {
   const { user } = useContext(UserContext);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const linkStyles = { color: "black", textDecoration: "none" };
 
   const navigate = useNavigate();
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
+      <Drawer
+        anchor="right"
+        onClose={() => setIsDrawerOpen(false)}
+        open={isDrawerOpen}
+      >
+        <ul className="ItemList">
+          {user.isAuthenticated ? (
+            <>
+              <li className="ListItem">
+                <Link
+                  onClick={() => setIsDrawerOpen(false)}
+                  style={{
+                    display: "inline-block",
+                    textDecoration: "none",
+                    width: "100%",
+                    color: "inherit",
+                  }}
+                  to="/blogs/new"
+                >
+                  Write
+                </Link>
+              </li>
+              <li className="ListItem">
+                <Link
+                  onClick={() => setIsDrawerOpen(false)}
+                  style={{
+                    display: "inline-block",
+                    textDecoration: "none",
+                    width: "100%",
+                    color: "inherit",
+                  }}
+                  to="/logout"
+                >
+                  Logout
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="ListItem">
+                <Link
+                  onClick={() => setIsDrawerOpen(false)}
+                  style={{
+                    display: "inline-block",
+                    textDecoration: "none",
+                    width: "100%",
+                    color: "inherit",
+                  }}
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="ListItem">
+                <Link
+                  onClick={() => setIsDrawerOpen(false)}
+                  style={{
+                    display: "inline-block",
+                    textDecoration: "none",
+                    width: "100%",
+                    color: "inherit",
+                  }}
+                  to="/accounts/new"
+                >
+                  Sign Up
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </Drawer>
       <Container>
         <img
           height="85px"
@@ -49,41 +142,43 @@ function NavBar({ variant }) {
           onClick={() => navigate("/")}
         />
 
-        <ItemList>
-          <Link style={linkStyles} to="/">
-            <ListItem>Home</ListItem>
-          </Link>
-          <Link style={linkStyles} to="/blogs/new">
-            <ListItem>Note</ListItem>
-          </Link>
-          {user.isAuthenticated ? (
-            <>
-              <Link style={linkStyles} to="/logout">
-                <ListItem
-                  style={{
-                    backgroundColor: "#009688",
-                    color: "white",
-                  }}
-                >
-                  Logout
-                </ListItem>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link style={linkStyles} to="/login">
-                <ListItem>Login</ListItem>
-              </Link>
-              <Link style={linkStyles} to="/accounts/new">
-                <ListItem
-                  style={{ backgroundColor: "#009688", color: "white" }}
-                >
-                  Sign Up
-                </ListItem>
-              </Link>
-            </>
-          )}
-        </ItemList>
+        <MobileIcon onClick={() => setIsDrawerOpen(true)}>
+          <MenuIcon sx={{ fontSize: "40px", color: "#757575" }} />
+        </MobileIcon>
+        <Nav>
+          <ItemList>
+            {user.isAuthenticated ? (
+              <>
+                <Link style={linkStyles} to="/blogs/new">
+                  <ListItem>Write</ListItem>
+                </Link>
+                <Link style={linkStyles} to="/logout">
+                  <ListItem
+                    style={{
+                      backgroundColor: "#009688",
+                      color: "white",
+                    }}
+                  >
+                    Logout
+                  </ListItem>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link style={linkStyles} to="/login">
+                  <ListItem>Login</ListItem>
+                </Link>
+                <Link style={linkStyles} to="/accounts/new">
+                  <ListItem
+                    style={{ backgroundColor: "#009688", color: "white" }}
+                  >
+                    Sign Up
+                  </ListItem>
+                </Link>
+              </>
+            )}
+          </ItemList>
+        </Nav>
       </Container>
     </AppBar>
   );

@@ -64,7 +64,7 @@ function BlogCard({ id, title, body, date, name, tags, image, numOfComments }) {
 
   return (
     <BlogContainer onClick={(e) => navigate(`/blogs/${id}`)}>
-      <BlogImg image={`http://localhost:5000/${image}`} />
+      <BlogImg image={`${process.env.REACT_APP_BASE_URL}${image}`} />
       <BlogContent>
         <Stack direction="row" spacing={5}>
           <span style={{ whiteSpace: "nowrap" }}>by {name}</span>

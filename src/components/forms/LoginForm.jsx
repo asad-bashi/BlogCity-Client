@@ -5,6 +5,8 @@ import { UserContext } from "../../App";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Label, Button } from "./FormHelpers";
 
+axios.defaults.withCredentials = true;
+
 function LoginForm() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
@@ -16,11 +18,19 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/login", {
-        email,
-        password,
-      });
-      const userObj = await axios.get("http://localhost:5000/api/isAuth");
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/login`,
+        {
+          email,
+          password,
+        }
+      );
+      console.log(data);
+      const userObj = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}api/isAuth`
+      );
+
+      console.log(userObj);
       setUser(userObj.data);
       setHelperText(data.message);
 

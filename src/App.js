@@ -11,6 +11,7 @@ import Logout from "./pages/Logout";
 import EditBlog from "./pages/EditBlog";
 import Error from "./pages/Error";
 import EditComment from "./pages/EditComment";
+import ProfilePage from "./pages/ProfilePage";
 
 axios.defaults.withCredentials = true;
 
@@ -21,7 +22,9 @@ function App() {
   useEffect(() => {
     async function isAuth() {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/isAuth");
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}api/isAuth`
+        );
         setUser(data);
       } catch (e) {
         console.log(e);
@@ -46,6 +49,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/accounts/new" element={<CreateAccount />} />
+          <Route path="accounts/:id" element={<ProfilePage />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </UserContext.Provider>

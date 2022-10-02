@@ -16,7 +16,7 @@ function EditCommentForm({ comment }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/api/comments/${id}`, {
+    await axios.put(`${process.env.REACT_APP_BASE_URL}api/comments/${id}`, {
       body,
     });
     navigate(`/blogs/${comment.blog_id}`);

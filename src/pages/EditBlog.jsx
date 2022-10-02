@@ -16,7 +16,9 @@ function EditBlog() {
 
   useEffect(() => {
     async function getBlog() {
-      const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}api/blogs/${id}`
+      );
       setBlog(data);
     }
     getBlog();
@@ -29,7 +31,7 @@ function EditBlog() {
       ) : (
         <Message>
           {blog
-            ? `You're not authorized to reach this page. You need to`
+            ? `You're not authorized to reach this page. You need to `
             : `Blog Not Found`}
           <Link
             style={{ textDecoration: "none", color: "#009688" }}

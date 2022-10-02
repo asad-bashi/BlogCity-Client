@@ -17,7 +17,7 @@ function EditComment() {
   useEffect(() => {
     async function getComment() {
       const { data } = await axios.get(
-        `http://localhost:5000/api/comments/${id}`
+        `${process.env.REACT_APP_BASE_URL}api/comments/${id}`
       );
       setComment(data);
     }

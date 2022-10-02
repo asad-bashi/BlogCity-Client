@@ -4,7 +4,8 @@ import axios from "axios";
 import { TextField } from "@mui/material";
 import { Form, Label, Button } from "./FormHelpers";
 import TagTray from "../TagTray";
-
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { Tooltip } from "@mui/material";
 function BlogForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -26,7 +27,7 @@ function BlogForm() {
       }
     });
     const { data } = await axios.post(
-      "http://localhost:5000/api/blogs/",
+      `${process.env.REACT_APP_BASE_URL}api/blogs/`,
       {
         title,
         body,
@@ -36,6 +37,7 @@ function BlogForm() {
       { headers: { "Content-Type": "multipart/form-data" } }
     );
     setHelperText(data.message);
+    navigate(`/blogs/${data.id}`);
   }
 
   return (
@@ -58,7 +60,21 @@ function BlogForm() {
 
       <TagTray tags={tags} setTags={setTags} />
 
-      <input type="file" onChange={(e) => setImg(e.target.files[0])} />
+      <label htmlFor="image-upload">
+        <Tooltip title="add image">
+          <AddPhotoAlternateIcon
+            sx={{ color: "#009688", fontSize: "30px", cursor: "pointer" }}
+          />
+        </Tooltip>
+      </label>
+      <input
+        style={{
+          display: "none",
+        }}
+        id="image-upload"
+        type="file"
+        onChange={(e) => setImg(e.target.files[0])}
+      />
 
       <Button>Share</Button>
       <p

@@ -22,14 +22,21 @@ function AccountForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const { data } = await axios.post("http://localhost:5000/api/users", {
-      firstName,
-      lastName,
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}api/users`,
+      {
+        firstName,
+        lastName,
+        email,
+        password,
+      }
+    );
 
-    setHelperText(data);
+    setHelperText(data.message);
+
+    if (data.isValid) {
+      navigate(`/login`);
+    }
   }
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>

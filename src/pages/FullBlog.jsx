@@ -87,6 +87,15 @@ const Title = styled.h1`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 750px) {
+    flex-direction: column;
+    row-gap: 0.45rem;
+  }
+`;
+
 function FullBLog() {
   const { id } = useParams();
   const [blog, setBlog] = useState({});
@@ -100,7 +109,7 @@ function FullBLog() {
     async function getBlog() {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/blogs/${id}`
+          `${process.env.REACT_APP_BASE_URL}api/blogs/${id}`
         );
         setBlog(data);
         setImg(data.image.replaceAll("\\", "/"));
@@ -113,7 +122,7 @@ function FullBLog() {
     async function getComments() {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/commentsByBlogId/${id}`
+          `${process.env.REACT_APP_BASE_URL}api/commentsByBlogId/${id}`
         );
         setComments(data);
       } catch (e) {
@@ -127,7 +136,7 @@ function FullBLog() {
 
   async function handleDelete() {
     try {
-      await axios.delete(`http://localhost:5000/api/blogs/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}api/blogs/${id}`);
     } catch (e) {}
     setIsModalOpen(false);
     navigate("/");
@@ -167,7 +176,7 @@ function FullBLog() {
               </Stack>
             </DeleteConfirmation>
           </Modal>
-          <Poster image={`http://localhost:5000/${img}`} />
+          <Poster image={`${process.env.REACT_APP_BASE_URL}${img}`} />
           <BLogInfo>
             <Stack
               justifyContent="space-between"
@@ -201,13 +210,13 @@ function FullBLog() {
                 ""
               )}
             </Stack>
-            <Stack justifyContent="space-between" direction="row">
+            <Container>
               <Stack spacing={3} direction="row">
                 <span>{blog.name}</span>
                 <span>{blog.date}</span>
               </Stack>
               <span>{blog.tags}</span>
-            </Stack>
+            </Container>
           </BLogInfo>
           <Divider />
           <Main>{blog.body}</Main>

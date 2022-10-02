@@ -25,3 +25,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ItemList {
+  display: flex;
+  row-gap: 1.3rem;
+  flex-direction: column;
+  background-color: white;
+  height: 100%;
+  list-style: none;
+  padding: 0.75rem 0rem;
+}
+
+.ListItem {
+  font-weight: 300;
+  width: 355px;
+  font-size: 1.8rem;
+  transition: 100ms ease-in-out;
+  text-align: center;
+}
+
+.ListItem:hover {
+  cursor: pointer;
+  background-color: #4db6ac;
+  color: white;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #009688 !important;
+}
+
+.swiper-button-next {
+  margin-right: 20px;
+}

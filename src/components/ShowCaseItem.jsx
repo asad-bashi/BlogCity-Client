@@ -64,7 +64,7 @@ const Button = styled.button`
 function ShowCaseItem({ title, body, name, image, id }) {
   const navigate = useNavigate();
   return (
-    <Wrapper image={`http://localhost:5000/${image}`}>
+    <Wrapper image={`${process.env.REACT_APP_BASE_URL}${image}`}>
       <Content>
         <Title>{title}</Title>
         <Body>{`${body.slice(0, 150)}`}</Body>

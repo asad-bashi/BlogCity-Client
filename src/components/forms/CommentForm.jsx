@@ -14,13 +14,16 @@ function CommentForm({ setComments }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/comments/", {
-        comment: body,
-        blog_id: id,
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/comments/`,
+        {
+          comment: body,
+          blog_id: id,
+        }
+      );
 
       const req = await axios.get(
-        `http://localhost:5000/api/commentsByBlogId/${id}`
+        `${process.env.REACT_APP_BASE_URL}api/commentsByBlogId/${id}`
       );
 
       setComments(req.data);
@@ -43,7 +46,7 @@ function CommentForm({ setComments }) {
           rows={5}
         />
         <Button>Post Comment</Button>
-        <p>{helperText}</p>
+        <p style={{ textAlign: "center" }}>{helperText}</p>
       </Stack>
     </form>
   );
