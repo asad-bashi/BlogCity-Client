@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import styled from "styled-components";
 
 import { Form, Label, Button } from "./FormHelpers";
-
+axios.defaults.withCredentials = true;
 const NameContainer = styled.div`
   display: flex;
   gap: 1.5rem;

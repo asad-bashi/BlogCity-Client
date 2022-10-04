@@ -15,6 +15,7 @@ function EditBlogForm({ blog, setBlog }) {
     setTitle(blog.title);
     setBody(blog.body);
   }, [id]);
+  axios.defaults.withCredentials = true;
 
   async function handleSubmit(e) {
     e.preventDefault();

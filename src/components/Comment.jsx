@@ -70,6 +70,7 @@ function Comment({ comment, setComments }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   function handleClick() {
     setShowOptions((prev) => !prev);

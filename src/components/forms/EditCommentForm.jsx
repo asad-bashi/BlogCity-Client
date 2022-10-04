@@ -13,6 +13,7 @@ function EditCommentForm({ comment }) {
   useEffect(() => {
     setBody(comment.body);
   }, [id]);
+  axios.defaults.withCredentials = true;
 
   async function handleSubmit(e) {
     e.preventDefault();

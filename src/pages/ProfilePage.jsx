@@ -16,6 +16,7 @@ function ProfilePage() {
   const [user, setUser] = useState({});
   const [blogs, setBlogs] = useState([]);
   const { id } = useParams();
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getUser() {

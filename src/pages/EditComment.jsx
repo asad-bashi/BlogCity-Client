@@ -14,6 +14,7 @@ function EditComment() {
   const [comment, setComment] = useState({});
   const { user } = useContext(UserContext);
 
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     async function getComment() {
       const { data } = await axios.get(

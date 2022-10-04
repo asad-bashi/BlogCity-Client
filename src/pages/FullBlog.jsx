@@ -104,6 +104,7 @@ function FullBLog() {
   const [img, setImg] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getBlog() {

@@ -52,6 +52,7 @@ const SelectedTag = styled.span`
 
 function Categories({ setBlogs }) {
   const [test, setTest] = useState({ category: "All", location: 0 });
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getBlogs() {

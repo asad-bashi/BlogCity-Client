@@ -43,6 +43,7 @@ function Home() {
   const [blogs, setBlogs] = useState([]);
   const [blogsShowCase, setBlogsShowcase] = useState([]);
   SwiperCore.use([Autoplay, Navigation]);
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getShowCaseBlogs() {

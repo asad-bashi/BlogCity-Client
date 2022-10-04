@@ -25,6 +25,7 @@ const LogoutContainer = styled.div`
 function Logout() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function logoutUser() {

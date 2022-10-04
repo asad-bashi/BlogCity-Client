@@ -13,6 +13,7 @@ function EditBlog() {
   const { id } = useParams();
   const [blog, setBlog] = useState({});
   const { user } = useContext(UserContext);
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getBlog() {

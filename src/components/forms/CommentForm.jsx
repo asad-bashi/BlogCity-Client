@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 function CommentForm({ setComments }) {
   const [body, setBody] = useState("");
   const [helperText, setHelperText] = useState("");
-
+  axios.defaults.withCredentials = true;
   const { id } = useParams();
 
   async function handleSubmit(e) {

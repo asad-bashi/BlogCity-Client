@@ -13,7 +13,7 @@ function BlogForm() {
   const [tags, setTags] = useState([]);
   const [img, setImg] = useState(null);
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   async function handleSubmit(e) {
     e.preventDefault();
     let selectedTags = "";
