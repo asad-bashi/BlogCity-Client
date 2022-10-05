@@ -26,18 +26,25 @@ function BlogForm() {
         }
       }
     });
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}api/blogs/`,
-      {
-        title,
-        body,
-        selectedTags,
-        img,
-      },
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
-    setHelperText(data.message);
-    navigate(`/blogs/${data.id}`);
+
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/blogs/`,
+        {
+          title,
+          body,
+          selectedTags,
+          img,
+        },
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      setHelperText(data.message);
+      if (data.id) {
+        navigate(`/blogs/${data.id}`);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
