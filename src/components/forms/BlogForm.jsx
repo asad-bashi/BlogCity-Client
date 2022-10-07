@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// import FormData from "form-data";
 import { TextField } from "@mui/material";
 import { Form, Label, Button } from "./FormHelpers";
 import TagTray from "../TagTray";
@@ -26,6 +27,12 @@ function BlogForm() {
         }
       }
     });
+
+    // const form = new FormData();
+    // form.append("title", title);
+    // form.append("body", body);
+    // form.append("selectedTags", selectedTags);
+    // form.append("img", img, img.name);
 
     try {
       const { data } = await axios.post(

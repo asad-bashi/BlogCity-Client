@@ -101,7 +101,6 @@ function FullBLog() {
   const [blog, setBlog] = useState({});
   const [comments, setComments] = useState([]);
   const { user } = useContext(UserContext);
-  const [img, setImg] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
@@ -113,7 +112,6 @@ function FullBLog() {
           `${process.env.REACT_APP_BASE_URL}api/blogs/${id}`
         );
         setBlog(data);
-        setImg(data.image.replaceAll("\\", "/"));
       } catch (e) {
         console.log(e);
       }
@@ -177,7 +175,7 @@ function FullBLog() {
               </Stack>
             </DeleteConfirmation>
           </Modal>
-          <Poster image={`${process.env.REACT_APP_BASE_URL}${img}`} />
+          <Poster image={blog.image} />
           <BLogInfo>
             <Stack
               justifyContent="space-between"

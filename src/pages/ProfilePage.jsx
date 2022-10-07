@@ -41,12 +41,13 @@ function ProfilePage() {
         <AccountCircleIcon
           sx={{ fontSize: "45px", color: "#009688", width: "75px" }}
         />
-        <Message>{user.first_name}</Message>
+        <Message>Welcome {user.first_name}</Message>
       </Stack>
       {user.first_name ? (
         <>
           {blogs.length ? (
             <>
+              <Message>Your Blogs</Message>
               {blogs.map(
                 ({
                   id,
@@ -67,7 +68,7 @@ function ProfilePage() {
                       body={body}
                       title={title}
                       tags={tags}
-                      image={image.replaceAll("\\", "/")}
+                      image={image}
                       numOfComments={numOfComments}
                     />
                   );
@@ -78,7 +79,7 @@ function ProfilePage() {
             <Message>
               {`has no blogs at the moment `}
               <Link style={{ textDecoration: "none", color: "#009688" }} to="/">
-                Home
+                Return Home
               </Link>
             </Message>
           )}
@@ -87,7 +88,7 @@ function ProfilePage() {
         <Message>
           {`Sorry user not found `}
           <Link style={{ textDecoration: "none", color: "#009688" }} to="/">
-            Home
+            Return Home
           </Link>
         </Message>
       )}

@@ -86,7 +86,7 @@ function Home() {
                   title={title}
                   body={body}
                   name={name}
-                  image={image.replaceAll("\\", "/")}
+                  image={image}
                 />
               </SwiperSlide>
             );
@@ -107,7 +107,7 @@ function Home() {
                 body={body}
                 title={title}
                 tags={tags}
-                image={image.replaceAll("\\", "/")}
+                image={image}
                 numOfComments={numOfComments}
               />
             );
