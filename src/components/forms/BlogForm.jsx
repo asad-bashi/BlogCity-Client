@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import FormData from "form-data";
-import { TextField } from "@mui/material";
+import { TextField, Tooltip, Stack } from "@mui/material";
 import { Form, Label, Button } from "./FormHelpers";
 import TagTray from "../TagTray";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { Tooltip } from "@mui/material";
 function BlogForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -27,12 +25,6 @@ function BlogForm() {
         }
       }
     });
-
-    // const form = new FormData();
-    // form.append("title", title);
-    // form.append("body", body);
-    // form.append("selectedTags", selectedTags);
-    // form.append("img", img, img.name);
 
     try {
       const { data } = await axios.post(
@@ -76,9 +68,12 @@ function BlogForm() {
 
       <label htmlFor="image-upload">
         <Tooltip title="add image">
-          <AddPhotoAlternateIcon
-            sx={{ color: "#009688", fontSize: "30px", cursor: "pointer" }}
-          />
+          <Stack justifyContent="space-between" direction="row">
+            <AddPhotoAlternateIcon
+              sx={{ color: "#009688", fontSize: "30px", cursor: "pointer" }}
+            />
+            <p>{img?.name}</p>
+          </Stack>
         </Tooltip>
       </label>
       <input
