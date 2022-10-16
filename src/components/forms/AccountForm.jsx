@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { Form, Label, Button } from "./FormHelpers";
 axios.defaults.withCredentials = true;
@@ -17,10 +18,12 @@ function AccountForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [helperText, setHelperText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
     const { data } = await axios.post(
       `${process.env.REACT_APP_BASE_URL}api/users`,
@@ -33,6 +36,7 @@ function AccountForm() {
     );
 
     setHelperText(data.message);
+    setIsLoading(false);
 
     if (data.isValid) {
       navigate(`/login`);
@@ -73,7 +77,14 @@ function AccountForm() {
         required
         label="Password"
       />
-      <p>{helperText}</p>
+      <>
+        {isLoading ? (
+          <CircularProgress sx={{ color: "#009688" }} />
+        ) : (
+          <p>{helperText}</p>
+        )}
+      </>
+
       <Button>Create Account</Button>
     </Form>
   );

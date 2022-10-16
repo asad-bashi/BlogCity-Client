@@ -26,15 +26,17 @@ const Wrapper = styled.section`
 
 const Tag = styled.span`
   background-color: white;
+  border: 1px solid #e0e0e0;
   user-select: none;
   font-weight: 300;
-  padding: 6px 15px;
+  padding: 6px 20px;
   border-radius: 100px;
   color: #424242;
   transition: 100ms ease-in;
   &:hover {
     background-color: #009688;
     color: white;
+    border: 1px solid transparent;
     cursor: pointer;
   }
 `;
@@ -44,22 +46,25 @@ const SelectedTag = styled.span`
   color: white;
   user-select: none;
   font-weight: 300;
-  padding: 6px 15px;
+  padding: 6px 20px;
+  border: 1px solid transparent;
   border-radius: 100px;
   transition: 100ms ease-in;
   cursor: pointer;
 `;
 
-function Categories({ setBlogs }) {
+function Categories({ setBlogs, setIsLoading }) {
   const [test, setTest] = useState({ category: "All", location: 0 });
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getBlogs() {
+      setIsLoading(true);
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}api/category-blogs/${test.category}`
       );
       setBlogs(data);
+      setIsLoading(false);
     }
     getBlogs();
   }, [test]);

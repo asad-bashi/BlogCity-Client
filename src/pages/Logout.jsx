@@ -10,7 +10,6 @@ const Message = styled.p`
   font-size: 1.4rem;
 `;
 
-
 const LogoutContainer = styled.div`
   display: flex;
   row-gap: 3rem;

@@ -41,11 +41,6 @@ const Author = styled.p`
   font-size: 1.1rem;
 `;
 
-const Tag = styled.p`
-  color: white;
-  font-size: 1.1rem;
-`;
-
 const Button = styled.button`
   padding: 0.65rem 1.2rem;
   font-size: 1.1rem;

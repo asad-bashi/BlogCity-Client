@@ -5,7 +5,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { Badge } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#009688",
@@ -21,12 +21,12 @@ const BlogContainer = styled.div`
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   width: 400px;
   height: fit-content;
-
-  transition: 150ms ease-in;
+  transition: 100ms ease-in-out;
   &:hover {
     cursor: pointer;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
       rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transform: translateY(-10px);
   }
 `;
 
@@ -36,12 +36,13 @@ const BlogImg = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   min-height: 350px;
+  transition: 100ms ease-in;
 `;
 
 const BlogContent = styled.div`
   padding: 2rem 3rem;
   display: flex;
-  row-gap: 1.5rem;
+  row-gap: 1rem;
   flex-direction: column;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,7 +72,7 @@ function BlogCard({ id, title, body, date, name, tags, image, numOfComments }) {
           <span style={{ whiteSpace: "nowrap" }}>{date}</span>
         </Stack>
         <BlogTitle>{title}</BlogTitle>
-        <BlogBody>{`${body.slice(0, 300)}`}</BlogBody>
+        <BlogBody>{`${body.slice(0, 120)}`}</BlogBody>
 
         <Divider textAlign="right">
           <ThemeProvider theme={theme}>

@@ -28,7 +28,7 @@ const Poster = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 500px;
+  height: 600px;
 `;
 
 const BLogInfo = styled.div`

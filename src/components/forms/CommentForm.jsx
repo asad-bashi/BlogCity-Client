@@ -4,15 +4,20 @@ import { Stack } from "@mui/material";
 import { Button } from "./FormHelpers";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../BlogCard";
+import { CircularProgress } from "@mui/material";
 
 function CommentForm({ setComments }) {
   const [body, setBody] = useState("");
   const [helperText, setHelperText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   axios.defaults.withCredentials = true;
   const { id } = useParams();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/comments/`,
@@ -28,6 +33,7 @@ function CommentForm({ setComments }) {
 
       setComments(req.data);
       setHelperText(data.message);
+      setIsLoading(false);
     } catch (e) {
       console.log(e);
     }
@@ -46,7 +52,15 @@ function CommentForm({ setComments }) {
           rows={5}
         />
         <Button>Post Comment</Button>
-        <p style={{ textAlign: "center" }}>{helperText}</p>
+        <ThemeProvider theme={theme}>
+          {isLoading ? (
+            <p style={{ textAlign: "center" }}>
+              <CircularProgress color="primary" />
+            </p>
+          ) : (
+            <p style={{ textAlign: "center" }}>{helperText}</p>
+          )}
+        </ThemeProvider>
       </Stack>
     </form>
   );

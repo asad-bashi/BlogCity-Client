@@ -93,6 +93,20 @@ function NavBar() {
                     width: "100%",
                     color: "inherit",
                   }}
+                  to={`/accounts/${user.id}`}
+                >
+                  Profile
+                </Link>
+              </li>
+              <li className="ListItem">
+                <Link
+                  onClick={() => setIsDrawerOpen(false)}
+                  style={{
+                    display: "inline-block",
+                    textDecoration: "none",
+                    width: "100%",
+                    color: "inherit",
+                  }}
                   to="/logout"
                 >
                   Logout
@@ -151,6 +165,9 @@ function NavBar() {
               <>
                 <Link style={linkStyles} to="/blogs/new">
                   <ListItem>Write</ListItem>
+                </Link>
+                <Link style={linkStyles} to={`/accounts/${user.id}`}>
+                  <ListItem>Profile</ListItem>
                 </Link>
                 <Link style={linkStyles} to="/logout">
                   <ListItem

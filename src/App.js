@@ -49,7 +49,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/accounts/new" element={<CreateAccount />} />
-          <Route path="accounts/:id" element={<ProfilePage />} />
+          <Route path="/accounts/:id" element={<ProfilePage />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </UserContext.Provider>

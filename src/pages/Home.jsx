@@ -6,6 +6,10 @@ import Categories from "../components/Categories";
 import axios from "axios";
 import ShowCaseItem from "../components/ShowCaseItem";
 import { Swiper, SwiperSlide } from "swiper/react";
+import LinearProgress from "@mui/material/LinearProgress";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../components/BlogCard";
+import { CircularProgress } from "@mui/material";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
@@ -42,11 +46,14 @@ const BlogContainer = styled.main`
 function Home() {
   const [blogs, setBlogs] = useState([]);
   const [blogsShowCase, setBlogsShowcase] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShowCaseLoading, setIsShowCaseLoading] = useState(false);
   SwiperCore.use([Autoplay, Navigation]);
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function getShowCaseBlogs() {
+      setIsShowCaseLoading(true);
       try {
         const { data } = await axios.get(
           `${process.env.REACT_APP_BASE_URL}api/blogs`
@@ -55,46 +62,57 @@ function Home() {
       } catch (e) {
         console.log(e);
       }
+      setIsShowCaseLoading(false);
     }
     getShowCaseBlogs();
   }, []);
-
   return (
-    <PageContainer id="svg">
-      <ShowCase>
-        <Swiper
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          navigation={true}
-          style={{ height: "100%" }}
-        >
-          {blogsShowCase.slice(0, 5).map(({ title, body, name, image, id }) => {
-            return (
-              <SwiperSlide
-                key={uuidv4()}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <ShowCaseItem
-                  id={id}
-                  key={uuidv4()}
-                  title={title}
-                  body={body}
-                  name={name}
-                  image={image}
-                />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-        <></>
-      </ShowCase>
-      <Categories setBlogs={setBlogs} />
+    <PageContainer>
+      <ThemeProvider theme={theme}>
+        <ShowCase>
+          {isShowCaseLoading ? (
+            <CircularProgress size={100} />
+          ) : (
+            <Swiper
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              navigation={true}
+              style={{ height: "100%" }}
+            >
+              {blogsShowCase
+                .slice(0, 5)
+                .map(({ title, body, name, image, id }) => {
+                  return (
+                    <SwiperSlide
+                      key={uuidv4()}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <ShowCaseItem
+                        id={id}
+                        key={uuidv4()}
+                        title={title}
+                        body={body}
+                        name={name}
+                        image={image}
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
+          )}
+        </ShowCase>
+      </ThemeProvider>
+      <Categories setBlogs={setBlogs} setIsLoading={setIsLoading} />
+
+      <ThemeProvider theme={theme}>
+        {isLoading ? <LinearProgress color="primary" /> : ""}
+      </ThemeProvider>
       <BlogContainer>
         {blogs.map(
           ({ id, title, body, date, name, tags, image, numOfComments }) => {

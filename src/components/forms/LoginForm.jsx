@@ -4,6 +4,7 @@ import axios from "axios";
 import { UserContext } from "../../App";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Label, Button } from "./FormHelpers";
+import CircularProgress from "@mui/material/CircularProgress";
 
 axios.defaults.withCredentials = true;
 
@@ -13,9 +14,11 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [helperText, setHelperText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   axios.defaults.withCredentials = true;
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const { data } = await axios.post(
@@ -25,14 +28,12 @@ function LoginForm() {
           password,
         }
       );
-      console.log(data);
       const userObj = await axios.get(
         `${process.env.REACT_APP_BASE_URL}api/isAuth`
       );
-
-      console.log(userObj);
       setUser(userObj.data);
       setHelperText(data.message);
+      setIsLoading(false);
 
       if (userObj.data.isAuthenticated) {
         navigate("/");
@@ -56,7 +57,13 @@ function LoginForm() {
         label="password"
         type="password"
       />
-      <h3>{helperText}</h3>
+      <>
+        {isLoading ? (
+          <CircularProgress sx={{ color: "#009688" }} />
+        ) : (
+          <p style={{ fontSize: "1.2rem" }}>{helperText}</p>
+        )}
+      </>
       <Button>Log In</Button>
       <Stack
         fontSize="1.2rem"
@@ -64,7 +71,7 @@ function LoginForm() {
         spacing={1}
         justifyContent="center"
       >
-        <span>Not a member?</span>
+        <p>Not a member?</p>
         <Link
           style={{ textDecoration: "none", color: "#009688" }}
           to="/accounts/new"
